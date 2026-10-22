@@ -1,0 +1,193 @@
+{
+ "screen": [
+  900,
+  560
+ ],
+ "scale": 2,
+ "shots": [
+  {
+   "duration": 1.4,
+   "symbol": "main",
+   "cursor": [
+    300,
+    430
+   ],
+   "caption": "Resolution Control switches resolutions from the menu bar",
+   "windows": [
+    {
+     "id": "s",
+     "title": "Safari",
+     "rect": [
+      40,
+      80,
+      430,
+      300
+     ]
+    },
+    {
+     "id": "n",
+     "title": "Notes",
+     "rect": [
+      330,
+      250,
+      360,
+      240
+     ]
+    }
+   ]
+  },
+  {
+   "duration": 0.15,
+   "move": 0.7,
+   "target": "@item"
+  },
+  {
+   "duration": 0.6,
+   "panel": "main",
+   "symbol": "main",
+   "target": "@item",
+   "click": true
+  },
+  {
+   "duration": 0.25,
+   "move": 0.5,
+   "panel": "main",
+   "symbol": "main",
+   "target": "More Space"
+  },
+  {
+   "duration": 0.3,
+   "panel": "main",
+   "symbol": "main",
+   "target": "More Space",
+   "click": true
+  },
+  {
+   "duration": 0.05,
+   "move": 0.25,
+   "target": "More Space",
+   "black": 1
+  },
+  {
+   "duration": 0.15,
+   "cursor": [
+    300,
+    430
+   ],
+   "black": 1,
+   "zoom": 0.84,
+   "symbol": "more-space"
+  },
+  {
+   "duration": 2.0,
+   "move": 0.35,
+   "cursor": [
+    300,
+    430
+   ],
+   "caption": "More Space: 1800 × 1169, everything a bit smaller"
+  },
+  {
+   "duration": 0.15,
+   "move": 0.7,
+   "target": "@item"
+  },
+  {
+   "duration": 0.6,
+   "panel": "more-space",
+   "symbol": "more-space",
+   "target": "@item",
+   "click": true
+  },
+  {
+   "duration": 0.25,
+   "move": 0.5,
+   "panel": "more-space",
+   "symbol": "more-space",
+   "target": "2K"
+  },
+  {
+   "duration": 0.3,
+   "panel": "more-space",
+   "symbol": "more-space",
+   "target": "2K",
+   "click": true
+  },
+  {
+   "duration": 0.05,
+   "move": 0.25,
+   "target": "2K",
+   "black": 1
+  },
+  {
+   "duration": 0.15,
+   "cursor": [
+    300,
+    430
+   ],
+   "black": 1,
+   "zoom": 0.590625,
+   "symbol": "2k"
+  },
+  {
+   "duration": 2.0,
+   "move": 0.35,
+   "cursor": [
+    300,
+    430
+   ],
+   "caption": "2K: 2560 × 1600 at 1×, the most space"
+  },
+  {
+   "duration": 0.15,
+   "move": 0.7,
+   "target": "@item"
+  },
+  {
+   "duration": 0.6,
+   "panel": "2k",
+   "symbol": "2k",
+   "target": "@item",
+   "click": true
+  },
+  {
+   "duration": 0.25,
+   "move": 0.5,
+   "panel": "2k",
+   "symbol": "2k",
+   "target": "Default"
+  },
+  {
+   "duration": 0.3,
+   "panel": "2k",
+   "symbol": "2k",
+   "target": "Default",
+   "click": true
+  },
+  {
+   "duration": 0.05,
+   "move": 0.25,
+   "target": "Default",
+   "black": 1
+  },
+  {
+   "duration": 0.15,
+   "cursor": [
+    300,
+    430
+   ],
+   "black": 1,
+   "zoom": 1.0,
+   "symbol": "main"
+  },
+  {
+   "duration": 2.0,
+   "move": 0.35,
+   "cursor": [
+    300,
+    430
+   ],
+   "caption": "Back to Default with one click"
+  }
+ ]
+}

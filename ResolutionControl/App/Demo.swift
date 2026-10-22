@@ -27,8 +27,11 @@ enum Demo {
         func current(_ list: [DisplayMode], _ w: Int, _ hz: Double) -> DisplayMode? {
             list.first { $0.size.width == w && $0.size.hiDPI && $0.refresh == hz }
         }
+        // `--current 1800` starts the built-in display at another width (the animation's states), 1512 otherwise.
+        let width = Runtime.value(after: "--current").flatMap(Int.init) ?? 1512
+        let builtinCurrent = builtin.first { $0.size.width == width && $0.refresh == ($0.size.hiDPI ? 120 : 60) }
         return [Display(id: 1, uuid: nil, name: "Built-in Retina Display", isBuiltin: true, modes: builtin,
-                        current: current(builtin, 1512, 120)),
+                        current: builtinCurrent),
                 Display(id: 2, uuid: nil, name: "Studio Display", isBuiltin: false, modes: studio,
                         current: current(studio, 2560, 60))]
     }

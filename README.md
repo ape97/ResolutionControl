@@ -1,19 +1,32 @@
-# Resolution Control
+<p align="center">
+  <img src="docs/images/icon.png" alt="Resolution Control icon" width="128">
+</p>
 
-[![macOS 26+](https://img.shields.io/badge/macOS-26%2B-black?logo=apple)](#requirements)
-[![Swift](https://img.shields.io/badge/Swift-SwiftUI-orange?logo=swift)](docs/DEVELOPMENT.md)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
-[![AI-assisted](https://img.shields.io/badge/built%20with-AI%20assistance-8A2BE2)](#ai-assisted-development)
+<h1 align="center">Resolution Control</h1>
 
-A menu bar app that switches your screen resolution, refresh rate and color profile from your own short list with one click.
+<p align="center">A menu bar app that switches your screen resolution, refresh rate and color profile from your own short list with one click.</p>
 
 <p align="center">
-  <img src="docs/images/main-dark.png" alt="Resolution Control menu (dark)" width="400">
-  <img src="docs/images/main-light.png" alt="Resolution Control menu (light)" width="400">
+  <a href="#requirements"><img src="https://img.shields.io/badge/macOS-26%2B-black?logo=apple" alt="macOS 26+"></a>
+  <a href="docs/DEVELOPMENT.md"><img src="https://img.shields.io/badge/Swift-SwiftUI-orange?logo=swift" alt="Swift"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue" alt="License: MIT"></a>
+  <a href="#ai-assisted-development"><img src="https://img.shields.io/badge/built%20with-AI%20assistance-8A2BE2" alt="AI-assisted"></a>
 </p>
 
 > [!NOTE]
 > This app was developed with AI assistance. See [AI-assisted development](#ai-assisted-development).
+
+## In action
+
+### Switching resolutions
+
+<p align="center">
+  <img src="docs/images/switch.gif" alt="Choosing More Space, then 2K, then Default from the menu; the desktop rescales each time" width="720">
+</p>
+
+Pick an entry and the display switches immediately: More Space, then 2K at 1x, then back to Default. The check mark and the header follow the active mode.
+
+<sub>The animations are rendered by the app itself from invented demo data; nothing on your Mac is recorded.</sub>
 
 ## Features
 
@@ -25,6 +38,11 @@ A menu bar app that switches your screen resolution, refresh rate and color prof
 - **Light on resources**: updates live without polling, no Dock icon, no network.
 
 ## Screenshots
+
+<p align="center">
+  <img src="docs/images/main-dark.png" alt="Resolution Control menu (dark)" width="400">
+  <img src="docs/images/main-light.png" alt="Resolution Control menu (light)" width="400">
+</p>
 
 <table>
   <tr>

@@ -129,6 +129,7 @@ struct ProfileRow: View {
         .contentShape(Rectangle())
         .onHover { hover = $0 }
         .onTapGesture { choose() }
+        .demoTarget(profile.name)
         .help(resolved == nil ? "Not available on this display" : "Switch to this resolution")
         .opacity(resolved == nil ? 0.45 : 1)
         .accessibilityElement(children: .combine)
