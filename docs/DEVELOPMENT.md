@@ -43,11 +43,13 @@ Typical loop: edit, `./scripts/check.sh`, look at `build/check/*.png`, then `./s
 The app binary (`ResolutionControl.app/Contents/MacOS/ResolutionControl`) understands a few arguments used by the scripts:
 
 - `--snapshot <base> [page]` renders the menu off-screen to `<base>-light.png`, `<base>-dark.png` and `<base>-symbol.png`
-  and exits. No window is shown. Pages: none (main menu), `--settings`, `--editor` (editor for the last entry).
+  and exits. No window is shown. Pages: none (main menu), `--settings`, `--editor` (editor for the last entry), `--update <version>` (pretends a newer release exists).
 - `--demo` (with `--snapshot`) uses invented data (`App/Demo.swift`), so screenshots never show your own displays or list.
 - `--profiles <plist>` (with `--snapshot`, without `--demo`) renders an exported defaults file, for example from `defaults export <bundle id> <file>`. The file is read, never written.
 - `--selftest <file.json>` runs the logic tests (built-in list, storage, mode matching against the real displays) and writes the result as JSON.
 - `--structuretest <file.json>` checks that menu updates stay structurally quiet (otherwise macOS keeps resetting the pointer) and writes the result as JSON.
+- `--check-update <file.json>` asks GitHub once for the latest release, exactly like the update check, and writes the
+  result as JSON (current and latest version, whether the notice would show). Manual test only, never part of `check.sh`.
 
 ## Signing
 
@@ -62,14 +64,24 @@ DEVELOPMENT_TEAM = YOURTEAMID
 
 ## Releasing
 
+Every published release reaches users who switched on **Check for Updates** within a day, so releases are deliberate:
+
+- Only GitHub releases count: commits, pushes and tags never trigger the notice, and neither do drafts or pre-releases
+  (`releases/latest` skips them). Use `gh release create … --prerelease` for a build someone should try first.
+- Bundle small changes; documentation, images and scripts alone don't need a release.
+- Tag every release `v<version>` with a plain numeric version (`1.10.0` is newer than `1.9.3`).
+- Never publish a release just to test the notice: build a zip with a lower version locally and run it with `--check-update`.
+
 1. Raise `MARKETING_VERSION` in `project.yml`.
 2. `./scripts/check.sh` must be green; refresh the README images with `./scripts/screenshots.sh` if the UI changed.
 3. `./scripts/release.sh` builds the zip. It always signs ad hoc, even with `Local.xcconfig` present, because a personal
    certificate would put the developer's name into the signature, and it strips the binary so no build paths remain.
+   The signature's designated requirement is the bundle identifier instead of the ad-hoc default (one exact build), so
+   permissions granted in System Settings stay valid after an update.
 4. Commit, tag and publish, for example with the GitHub CLI:
    ```sh
-   git tag v1.1.1 && git push --tags
-   gh release create v1.1.1 build/release/ResolutionControl-1.1.1.zip --title "Resolution Control 1.1.1" --notes "…"
+   git tag -a v1.2.0 -m "Resolution Control 1.2.0" && git push origin v1.2.0
+   gh release create v1.2.0 build/release/ResolutionControl-1.2.0.zip --title "Resolution Control 1.2.0" --notes "…"
    ```
 
 ## After a macOS or Xcode update
@@ -89,6 +101,10 @@ interfaces most likely to change.
 - The menu is a SwiftUI `MenuBarExtra` (`.window` style); the app registers itself as a login item with `SMAppService`
   on the first launch from `/Applications`.
 - While the menu is open the layout never changes structurally, because every structural change makes macOS reset the mouse pointer (`--structuretest` checks this).
+- **Update check** (`App/UpdateCheck.swift`, off by default): at most once a day (on launch, when the menu opens, after
+  waking; no timer) a single `GET https://api.github.com/repos/ape97/ResolutionControl/releases/latest`. Only `tag_name` and
+  `html_url` are read; a newer version shows a notice in the menu whose **Download** opens the release page. Nothing is
+  downloaded or installed by the app.
 - Limits: only modes macOS offers for the display; no custom timings, rotation, HDR presets or color depth.
 
 ## Contributing

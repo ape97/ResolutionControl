@@ -6,7 +6,7 @@ cd "${0:A:h}/.."
 BIN=ResolutionControl
 COLORS=(A78BFA 7C3AED)   # approximates the icon gradient, see scripts/icon.swift
 # page:snapshot arguments (the first page also provides the menu bar icon)
-PAGES=("main:" "settings:--settings" "editor:--editor")
+PAGES=("main:" "settings:--settings" "editor:--editor" "update:--update 1.3.0")
 # Extra states only the animations use (rendered, not composed): the built-in display at another resolution.
 EXTRA=("more-space:--current 1800" "2k:--current 2560")
 

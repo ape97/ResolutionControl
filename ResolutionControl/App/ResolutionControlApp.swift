@@ -30,7 +30,9 @@ enum Runtime {
     static let isStructureTest = arguments.contains("--structuretest")
     /// Snapshot with invented displays and the default list; reads and writes nothing of the user.
     static let isDemo = isSnapshot && arguments.contains("--demo")
-    static let headless = isSnapshot || isSelfTest || isStructureTest
+    /// Manual test of the update check from the installed app: one request, result as JSON, no menu.
+    static let isCheckUpdate = arguments.contains("--check-update")
+    static let headless = isSnapshot || isSelfTest || isStructureTest || isCheckUpdate
 
     static func value(after flag: String) -> String? {
         guard let i = arguments.firstIndex(of: flag), i + 1 < arguments.count else { return nil }
@@ -47,8 +49,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             MainActor.assumeIsolated { SelfTest.run(writingTo: path) }
         } else if let path = Runtime.value(after: "--structuretest") {
             MainActor.assumeIsolated { StructureTest.run(writingTo: path) }
+        } else if let path = Runtime.value(after: "--check-update") {
+            MainActor.assumeIsolated { UpdateCheck.report(writingTo: path) }
         } else {
             LoginItem.enableOnFirstLaunch()
+            MainActor.assumeIsolated { UpdateCheck.shared.start() }
             // Evidence without interaction (log show): does the app find its menu bar button (fallback for closing)?
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 MainActor.assumeIsolated {
@@ -90,7 +95,7 @@ enum LoginItem {
 }
 
 /// Developer aid: renders the menu content invisibly into PNG files (light and dark) without showing a window.
-/// Usage: ResolutionControl --snapshot /path/base [--settings]
+/// Usage: ResolutionControl --snapshot /path/base [--settings] [--update <version>]
 ///   →  base-light.png, base-dark.png, base-symbol.png (menu bar, double resolution)
 enum Snapshot {
     @MainActor

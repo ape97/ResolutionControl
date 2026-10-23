@@ -113,6 +113,7 @@ enum SelfTest {
             expect(colors.contains { $0.name.contains("sRGB") }, "\(d.name): no sRGB color profile found")
         }
 
+        failures += UpdateCheck.selfTest()
         report["ok"] = failures.isEmpty
         report["failures"] = failures
         if let data = try? JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys]) {

@@ -35,7 +35,9 @@ Pick an entry and the display switches immediately: More Space, then 2K at 1x, t
 - **Editor**: pick any Retina or 1:1 mode the display offers, a refresh rate (ProMotion/highest or a fixed 60, 59.94, 50, 48 or 47.95 Hz) and a color profile (unchanged, factory or any installed RGB profile), plus a color and icon per entry.
 - **Settings**: show, hide, reorder, edit, delete (a second click confirms) and add entries.
 - **Several displays**: picker chips in the header; the list acts on the selected display.
-- **Light on resources**: updates live without polling, no Dock icon, no network.
+- **Light on resources**: updates live without polling, no Dock icon.
+- **Update notice** (optional, off by default): once a day the app looks up the latest release on GitHub and shows
+  "Version X available" in the menu, with **Download** (opens the release page) and **Skip**.
 
 ## Screenshots
 
@@ -48,6 +50,10 @@ Pick an entry and the display switches immediately: More Space, then 2K at 1x, t
   <tr>
     <td align="center"><img src="docs/images/settings-dark.png" width="360"><br>Settings: hide, reorder, edit, delete and add entries</td>
     <td align="center"><img src="docs/images/editor-dark.png" width="360"><br>Editor: resolution, refresh rate, color profile, color and icon</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/images/update-dark.png" width="360"><br>Update notice in the menu</td>
+    <td></td>
   </tr>
 </table>
 
@@ -70,7 +76,9 @@ To uninstall, quit it from the menu and move it to the Trash. Resolutions and co
 
 - Click the menu bar item and pick an entry to switch the selected display.
 - With several displays, choose the display with the chips in the header first.
-- Settings (gear icon): show, hide, reorder, edit, delete and add entries, and **Open at Login**. The editor shows a hint about sharpness (pixel-exact, integer or scaled) for the chosen mode.
+- Settings (gear icon): show, hide, reorder, edit, delete and add entries, **Check for Updates** and **Open at Login**. The editor shows a hint about sharpness (pixel-exact, integer or scaled) for the chosen mode.
+- **Updates**: with **Check for Updates** on, a new version appears in the menu. **Download** opens the release page; replace the
+  app in `/Applications` with the new one. Your list and settings stay.
 - Limits: only modes macOS offers for the display; no custom timings, rotation, HDR presets or color depth. On built-in displays 120 Hz exists only as ProMotion (variable); fixed rates go up to 60 Hz.
 
 ## Build from source
@@ -92,8 +100,9 @@ no helper tool. Switching display modes and color profiles uses the public CoreG
 any app may call for the current user. It reads the list of installed color profiles from the standard ColorSync
 folders. Changes are written to macOS the same way System Settings does, so they persist like any other display setting.
 
-Everything stays on your Mac: no network access, no telemetry. The only stored data are your list and settings in the
-app's user defaults.
+Everything stays on your Mac, no telemetry. The only network access is the optional update check (off by default): once a
+day one request to `api.github.com` for the latest release number of this repository. Nothing about you or your Mac is sent.
+The only stored data are your list and settings in the app's user defaults.
 
 ## AI-assisted development
 

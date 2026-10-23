@@ -45,6 +45,7 @@ struct MenuView: View {
         }
         .padding(10)
         .frame(width: 380)
+        .onAppear { UpdateCheck.shared.checkIfDue() }
     }
 
     private func go(_ next: Page) {
@@ -80,6 +81,8 @@ struct MainPage: View {
                     SettingNote(error, tint: .red)
                 }
             }
+
+            UpdateNotice()
 
             Module(spacing: 2) {
                 let shown = model.profiles.filter(\.shown)
@@ -186,13 +189,14 @@ struct DisplayChip: View {
     }
 }
 
-/// Footer as in all apps: name on the left, Settings and Quit on the right.
+/// Footer as in all apps: app icon (settings pages only) and name on the left, Settings and Quit on the right.
 struct FooterBar: View {
     let settingsActive: Bool
     let toggleSettings: () -> Void
 
     var body: some View {
         HStack(spacing: 6) {
+            if settingsActive { AppIcon(size: 16) }
             Text("Resolution Control")
                 .font(.system(size: 10.5, weight: .medium))
                 .foregroundStyle(.tertiary)
