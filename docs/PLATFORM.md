@@ -13,6 +13,8 @@ Append new lines at the bottom and keep the format exactly (the "Platform now" v
 - **CoreGraphics display modes** (`CGDisplayCopyAllDisplayModes` with `kCGDisplayShowDuplicateLowResolutionModes`,
   `CGConfigureDisplayWithDisplayMode`, ioFlags 0x4 = default, 0x02000000 = native) and **ColorSync**
   (`ColorSyncDeviceSetCustomProfiles`) – `App/Displays.swift`; the self-test reads the real modes and checks the built-in list.
+- **GitHub releases API** (`App/UpdateCheck.swift`), only while Check for Updates is on: `GET api.github.com/repos/ape97/ResolutionControl/releases/latest`,
+  reads `tag_name` and `html_url`, ignores drafts and pre-releases. If GitHub changes this, only the update notice stops working.
 
 ## Tested
 tested: macOS=27.0.1 (26A434) Xcode=27.0 SDK=27.0 date=2026-10-16
